@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>RPS-Multiplayer</title>
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/gif" sizes="16x16">
+<!--     <link rel="stylesheet" type="text/css" href="assets/css/reset.css"> -->
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Palanquin+Dark" rel="stylesheet">
+
+    
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+  </head>
+
+  <body>
+
+      <nav class="navbar navbar-inverse bg-faded">
+          <h1 class="navbar-brand mb-0 navbarTitle" style="color: white">RockPaperScissors Multiplayer</h1>
+      </nav>
+
+      <div class="container-fluid">
+          <div class="row">
+
+
+
+              <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7 col-xl-7" id="mainContent">
+
+                  <img src="assets/images/rock.png" class="rpsImg rockImg center-block" alt="rock" data-choice="rock">
+                  <img src="assets/images/paper.png" class="rpsImg paperImg center-block" alt="paper" data-choice="paper">
+                  <img src="assets/images/scissors.png" class="rpsImg scissorImg center-block" alt="scissors" data-choice="scissors">
+
+                  <h2 class="instructionsText">Pick rock, paper, or scissors!</h2>
+
+                  
+              </div>
+
+              <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 rightColumn">
+
+                  <div id="chatBox">
+
+                      <div class="row">
+                          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                              <p class="messengerName">Player 1</p>
+                          </div>
+                          <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                              <p class="message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec gravida sapien neque, aliquet vestibulum odio ornare nec. Integer tristique orci hendrerit elit gravida, in efficitur lorem dapibus. Aenean accumsan odio et ligula maximus, a luctus arcu semper. In scelerisque, sem ut ultricies fermentum, turpis nunc feugiat tellus, vel sagittis nisi nisi lobortis elit.</p>
+                          </div>
+                      </div>
+
+                      <div class="row">
+                          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                              <p class="messengerName">Player 2</p>
+                          </div>
+                          <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                              <p class="message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec gravida sapien neque, aliquet vestibulum odio ornare nec. Integer tristique orci hendrerit elit gravida, in efficitur lorem dapibus. Aenean accumsan odio et ligula maximus, a luctus arcu semper. In scelerisque, sem ut ultricies fermentum, turpis nunc feugiat tellus, vel sagittis nisi nisi lobortis elit.</p>
+                          </div>
+                      </div>
+
+                      <div class="row">
+                          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                              <p class="messengerName">Player 1</p>
+                          </div>
+                          <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                              <p class="message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec gravida sapien neque, aliquet vestibulum odio ornare nec. Integer tristique orci hendrerit elit gravida, in efficitur lorem dapibus. Aenean accumsan odio et ligula maximus, a luctus arcu semper. In scelerisque, sem ut ultricies fermentum, turpis nunc feugiat tellus, vel sagittis nisi nisi lobortis elit.</p>
+                          </div>
+                      </div>
+
+                      <div class="row">
+                          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                              <p class="messengerName">Player 2</p>
+                          </div>
+                          <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                              <p class="message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec gravida sapien neque, aliquet vestibulum odio ornare nec. Integer tristique orci hendrerit elit gravida, in efficitur lorem dapibus. Aenean accumsan odio et ligula maximus, a luctus arcu semper. In scelerisque, sem ut ultricies fermentum, turpis nunc feugiat tellus, vel sagittis nisi nisi lobortis elit.</p>
+                          </div>
+                      </div>
+                      
+                  </div>
+
+                  <div class="form-group">
+                    <label for="comment">Message:</label>
+                    <textarea class="form-control" rows="3" id="comment"></textarea>
+                  </div>
+
+                  <button type="button" class="btn btn-info submitMessage">Send</button>
+
+              </div>
+
+               
+
+
+          </div> <!-- row -->
+      </div> <!-- container -->
+
+   
+
+
+      <!-- footer -->  
+      <nav class="navbar navbar-default navbar-fixed-bottom">
+          <div class="container">
+              <p>&copy; COPYRIGHT 2017 KEVIN WILSON</p>
+          </div>
+      </nav>
+
+
+      <!-- JavaScript -->
+      <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+      <script src="assets/javascript/app.js"></script>
+
+  </body>
+</html>

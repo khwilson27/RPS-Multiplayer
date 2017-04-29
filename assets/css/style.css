@@ -1,0 +1,54 @@
+body {
+	font-family: 'Palanquin Dark', sans-serif;
+	background-image: url("../images/backgroundGrid.png");
+	padding-bottom: 100px;
+}
+
+.mainContent, .rightColumn {
+	border-style: solid;
+	border-color: black;
+	border-width: 3px;
+	margin: 20px;
+}
+
+.rpsImg {
+	margin: 15px auto;
+	height: 150px;
+	background-color: white;
+	border-style: solid;
+	border-color: black;
+	border-width: 3px;
+}
+
+.messengerName {
+	color: blue;
+	float: left;
+	font-size: 20px;
+}
+
+.rightColumn {
+	padding: 20px;
+	background-color: white;
+}
+
+#chatBox {
+	padding: 20px;
+	height: 450px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+.instructionsText {
+	text-align: center;
+}
+
+
+.navbar-fixed-bottom {
+	text-align: center;
+	padding-top: 15px;
+	color: white;
+	font-size: 16px;
+	background-color: rgba(0, 0, 0, 1);
+}
+
+
