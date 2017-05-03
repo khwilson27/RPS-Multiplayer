@@ -23,28 +23,12 @@ $(document).ready(function() {
 			  });
 	  }
 
-	  var name= "";
+	  // define variables
+	  var name = "";
+	  var p1Name = "";
+	  var p1Choice = "";
 
-	   database.ref().on("value", function(snapshot) {
-
-	          var name = snapshot.val().name;
-	          var email = snapshot.val().email;
-	          var age = snapshot.val().age;
-	          var comment = snapshot.val().comment;
-
-	          $("#name-display").text(name);
-	          $("#email-display").text(email);
-	          $("#age-display").text(age);
-	          $("#comment-display").text(comment);
-
-	    // Create Error Handling
-	    // If any errors are experienced, log them to console.
-	    }, function(errorObject) {
-	      console.log("The read failed: " + errorObject.code);
-	    });
-
-	  console.log(db.p1nameChoice);
-
+	  // saves players name to global variable and renders on page
 	  $(".submitName").on("click", function(){
 			event.preventDefault();
 	  		if ($(".nameInput").val().trim() != "") {
@@ -78,16 +62,74 @@ $(document).ready(function() {
 	  	if (name != "") {
 	  		var choice = $(this).data("choice");
 	  		$(".rpsImg").removeClass("clickableImg");
+	  		$(".instructionsText").text("Waiting for other player to make a choice...");
 
-	  		db.ref("/p1nameChoice").set({
-	          name: name,
-	          message: choice
-	        });
+	  		if (p1Choice != "") {
+	  			db.ref("/playerData/player2Data").set({
+		          name: name,
+		          choice: choice
+		        });
+	  		} else {
+	  			db.ref("/playerData/player1Data").set({
+		          name: name,
+		          choice: choice
+		        });
+	  		}
 
 	  	} else {alert("You must first enter a name!")}
 
 	  })
 
+
+	  db.ref("/playerData").on("value", function(snapshot) {
+	      if (snapshot.child("player1Data").exists() && snapshot.child("player2Data").exists()) {
+
+			    // Evaluate inputs in game
+			    p1Name = snapshot.val().player1Data.name;
+			    p1Choice = snapshot.val().player1Data.choice;
+
+			    var p2Name = snapshot.val().player2Data.name;
+			    var p2Choice = snapshot.val().player2Data.choice;
+
+			    console.log(p1Name, p1Choice, p2Name, p2Choice);
+			    db.ref("/playerData").remove();
+
+			    // Determine winner
+			    if (p1Choice == p2Choice) {
+			    	$(".instructionsText").text("Tie! Both " + p1Name + " & " + p2Name + " chose " + p1Choice + "!");
+			    } else if (p1Choice == "rock") {
+			    	if (p2Choice == "scissors") {
+			    		$(".instructionsText").text(p1Name + " chose " + p1Choice +". " + p2Name + " chose " + p2Choice + ". " + p1Name + " wins!");	
+			    	} else if (p2Choice == "paper") {
+			    		$(".instructionsText").text(p1Name + " chose " + p1Choice +". " + p2Name + " chose " + p2Choice + ". " + p2Name + " wins!");
+			    	}
+			    } else if (p1Choice == "paper") {
+			    	if (p2Choice == "scissors"){
+			    		$(".instructionsText").text(p1Name + " chose " + p1Choice +". " + p2Name + " chose " + p2Choice + ". " + p2Name + " wins!");	
+			    	} else if (p2Choice == "rock") {
+			    		$(".instructionsText").text(p1Name + " chose " + p1Choice +". " + p2Name + " chose " + p2Choice + ". " + p1Name + " wins!");
+			    	}
+			    } else if (p1Choice == "scissors") {
+			    	if (p2Choice == "paper"){
+			    		$(".instructionsText").text(p1Name + " chose " + p1Choice +". " + p2Name + " chose " + p2Choice + ". " + p1Name + " wins!");	
+			    	} else if (p2Choice == "rock") {
+			    		$(".instructionsText").text(p1Name + " chose " + p1Choice +". " + p2Name + " chose " + p2Choice + ". " + p2Name + " wins!");
+			    	}
+			    }
+
+			    $(".instructionsText").append(" Choose rock, paper, or scissors to play again!");
+			    $(".rpsImg").addClass("clickableImg");
+			    p1Name = "";
+	  			p1Choice = "";
+
+		  } else if (snapshot.child("player1Data").exists()) {
+		  		p1Name = snapshot.val().player1Data.name;
+			    p1Choice = snapshot.val().player1Data.choice;
+		  }
+
+	  })
+
+	  // stores comments to firebase and appends them to the chat area
 	  $(".submitMessage").on("click", function() {
 
 		if (name != "") {
