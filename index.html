@@ -28,12 +28,9 @@
 
       <div class="container-fluid">
           <div class="row">
-
-
-
               <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7 col-xl-7" id="mainContent">
                   <div class="col-xs-4 playerCol">
-                      <h2 class="player1Area">Player 1:</h2>
+                      <h2 class="player1Area">You:</h2>
                       <h2 class="player1Name"></h2>
                       <hr>
                       <h2 class="player1Wins">Wins: 0</h2>
@@ -44,19 +41,21 @@
                       <img src="assets/images/rock.png" class="rpsImg rockImg center-block clickableImg" alt="rock" data-choice="rock">
                       <img src="assets/images/paper.png" class="rpsImg paperImg center-block clickableImg" alt="paper" data-choice="paper">
                       <img src="assets/images/scissors.png" class="rpsImg scissorImg center-block clickableImg" alt="scissors" data-choice="scissors">
-
-                      <h2 class="instructionsText">Enter your name!</h2>
                   </div>
 
                   <div class="col-xs-4 playerCol">
-                      <h2 class="player2Area">Player 2:</h2>
+                      <h2 class="player2Area">Opponent:</h2>
                       <h2 class="player2Name"></h2>
                       <hr>
                       <h2 class="player2Wins">Wins: 0</h2>
                       <h2 class="player2Losses">Losses: 0</h2>
                   </div>
 
-
+              <div class="row">
+                <div class="col-xs-12">
+                  <h2 class="instructionsText">Enter your name!</h2>
+                </div>
+              </div>
                   
               </div>
 
@@ -76,7 +75,7 @@
 
                   <div class="form-group">
                     <label for="comment">Message:</label>
-                    <textarea class="form-control" rows="3" id="comment"></textarea>
+                    <textarea class="form-control" rows="2" id="comment"></textarea>
                   </div>
 
                   <button type="button" class="btn btn-info submitMessage">Send</button>

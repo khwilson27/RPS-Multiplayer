@@ -14,19 +14,14 @@ $(document).ready(function() {
 	  // Create a variable to reference the database.
 	  var db = firebase.database();
 
-	  var resetDb = function() {
-			  db.ref().set({
-			    player1wins: 0,
-			    player1losses: 0,
-			    player2wins: 0,
-			    player2losses: 0,
-			  });
-	  }
-
-	  // define variables
+	  // Define variables
 	  var name = "";
 	  var p1Name = "";
 	  var p1Choice = "";
+	  var player1wins= 0;
+      var player1losses= 0;
+      var player2wins= 0;
+      var player2losses= 0;
 
 	  // saves players name to global variable and renders on page
 	  $(".submitName").on("click", function(){
@@ -62,7 +57,7 @@ $(document).ready(function() {
 	  	if (name != "") {
 	  		var choice = $(this).data("choice");
 	  		$(".rpsImg").removeClass("clickableImg");
-	  		$(".instructionsText").text("Waiting for other player to make a choice...");
+	  		$(".instructionsText").text("You picked " + choice + ". Waiting for other player to make a choice...");
 
 	  		if (p1Choice != "") {
 	  			db.ref("/playerData/player2Data").set({
@@ -82,6 +77,7 @@ $(document).ready(function() {
 
 
 	  db.ref("/playerData").on("value", function(snapshot) {
+
 	      if (snapshot.child("player1Data").exists() && snapshot.child("player2Data").exists()) {
 
 			    // Evaluate inputs in game
@@ -99,22 +95,49 @@ $(document).ready(function() {
 			    	$(".instructionsText").text("Tie! Both " + p1Name + " & " + p2Name + " chose " + p1Choice + "!");
 			    } else if (p1Choice == "rock") {
 			    	if (p2Choice == "scissors") {
-			    		$(".instructionsText").text(p1Name + " chose " + p1Choice +". " + p2Name + " chose " + p2Choice + ". " + p1Name + " wins!");	
+			    		$(".instructionsText").text(p1Name + " chose " + p1Choice +". " + p2Name + " chose " + p2Choice + ". " + p1Name + " wins!");
+			    		player1wins++;
+			    		player2losses++;	
 			    	} else if (p2Choice == "paper") {
 			    		$(".instructionsText").text(p1Name + " chose " + p1Choice +". " + p2Name + " chose " + p2Choice + ". " + p2Name + " wins!");
+			    		player1losses++;
+			    		player2wins++;
 			    	}
 			    } else if (p1Choice == "paper") {
 			    	if (p2Choice == "scissors"){
 			    		$(".instructionsText").text(p1Name + " chose " + p1Choice +". " + p2Name + " chose " + p2Choice + ". " + p2Name + " wins!");	
+			    		player1losses++;
+			    		player2wins++;
 			    	} else if (p2Choice == "rock") {
 			    		$(".instructionsText").text(p1Name + " chose " + p1Choice +". " + p2Name + " chose " + p2Choice + ". " + p1Name + " wins!");
+			    		player1wins++;
+			    		player2losses++;
 			    	}
 			    } else if (p1Choice == "scissors") {
 			    	if (p2Choice == "paper"){
-			    		$(".instructionsText").text(p1Name + " chose " + p1Choice +". " + p2Name + " chose " + p2Choice + ". " + p1Name + " wins!");	
+			    		$(".instructionsText").text(p1Name + " chose " + p1Choice +". " + p2Name + " chose " + p2Choice + ". " + p1Name + " wins!");
+			    		player1wins++;
+			    		player2losses++;	
 			    	} else if (p2Choice == "rock") {
 			    		$(".instructionsText").text(p1Name + " chose " + p1Choice +". " + p2Name + " chose " + p2Choice + ". " + p2Name + " wins!");
+			    		player1losses++;
+			    		player2wins++;
 			    	}
+			    }
+
+			    // Print oppenent's name and both players scores
+			    if (p1Name == name) {
+			    	$(".player1Wins").text("Wins: " + player1wins);
+			    	$(".player1Losses").text("Losses: " + player1losses);
+			    	$(".player2Wins").text("Wins: " + player2wins);
+			    	$(".player2Losses").text("Losses: " + player2losses);
+			    	$(".player2Name").text(p2Name);
+			    } else {
+			    	$(".player1Wins").text("Wins: " + player2wins);
+			    	$(".player1Losses").text("Losses: " + player2losses);
+			    	$(".player2Wins").text("Wins: " + player1wins);
+			    	$(".player2Losses").text("Losses: " + player1losses);
+			    	$(".player2Name").text(p1Name);
 			    }
 
 			    $(".instructionsText").append(" Choose rock, paper, or scissors to play again!");
@@ -132,6 +155,7 @@ $(document).ready(function() {
 	  // stores comments to firebase and appends them to the chat area
 	  $(".submitMessage").on("click", function() {
 
+	  	event.preventDefault();
 		if (name != "") {
 
 			var message = $("#comment").val().trim();
